@@ -1,9 +1,16 @@
 package;
 
 import flixel.FlxState;
+import flixel.FlxSprite;
+import flixel.text.FlxText;
+import flixel.FlxG;
 
 class TitleScreen extends FlxState
 {
+    var bg:FlxSprite;
+    var titleText:FlxText;
+    var startButton:FlxSprite;
+    
     override public function create()
     {
         super.create();
