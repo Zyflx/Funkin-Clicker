@@ -2,40 +2,46 @@ package;
 
 import flixel.FlxState;
 import flixel.FlxSprite;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
+import flixel.ui.FlxButton;
 import flixel.FlxG;
 
 class TitleScreen extends FlxState
 {
-    var bg:FlxSprite;
-    var titleText:FlxText;
-    var startButton:FlxSprite;
+    var logo:FlxSprite;
+    var playButton:FlxButton;
+    var optionsButton:FlxButton;
     
     override public function create()
     {
         super.create();
         
-        bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.CYAN);
-        add(bg);
+        logo = new FlxSprite(0, -350).loadGraphic(FunkPaths.grabImage('logo'));
+        logo.scale.set(0.35, 0.35);
+        logo.screenCenter(X);
+        add(logo);
 
-        titleText = new FlxText(0, FlxG.height / 2 - 100, 0, "Funkin' Clicker", 20);
-        titleText.setFormat(FunkPaths.grabFont('vcr.ttf'), 70, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-        titleText.borderSize = 1.2;
-        titleText.screenCenter(X);
-        add(titleText);
+        playButton = new FlxButton(0, FlxG.height / 2 + 50, 'Play', function() {
+            swapState(new PlayState());
+        });
+        playButton.scale.set(2, 2);
+        playButton.screenCenter(X);
+        add(playButton);
 
-        startButton = new FlxSprite(0, titleText.y + 100).loadGraphic(FunkPaths.grabImage('start'));
-        startButton.screenCenter(X);
-        add(startButton);
+        optionsButton = new FlxButton(0, playButton.y + 70, 'Options', function() {
+            swapState(new OptionsState());
+        });
+        optionsButton.scale.set(2, 2);
+        optionsButton.screenCenter(X);
+        add(optionsButton);
     }
     
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
-        
-         if (FlxG.mouse.overlaps(startButton) && FlxG.mouse.justPressed) {
-            FlxG.switchState(new PlayState());
-        }
+    }
+    
+    function swapState(state:FlxState)
+    {
+        FlxG.switchState(state);
     }
 }
