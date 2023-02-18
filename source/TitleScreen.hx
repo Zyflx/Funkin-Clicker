@@ -3,6 +3,7 @@ package;
 import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.text.FlxText;
+import flixel.util.FlxColor;
 import flixel.FlxG;
 
 class TitleScreen extends FlxState
